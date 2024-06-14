@@ -5,6 +5,7 @@ import {
 	middleware,
 	requestCountMiddleware,
 	activeRequestMiddleware,
+	requestTimeMiddleware,
 } from './middleware';
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 // app.use(middleware);
 app.use(requestCountMiddleware);
 app.use(activeRequestMiddleware);
+app.use(requestTimeMiddleware);
 
 app.get('/', (req: Request, res: Response) => {
 	res.send('Hello World');
