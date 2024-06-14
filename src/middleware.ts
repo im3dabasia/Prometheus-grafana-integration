@@ -1,6 +1,7 @@
 import e, { NextFunction, Request, Response } from 'express';
 import client from 'prom-client';
 
+// Basic middleware function to log request time
 export const middleware = (req: Request, res: Response, next: NextFunction) => {
 	const startTime = Date.now();
 	next();
@@ -32,6 +33,8 @@ export const activeRequestMiddleware = (
 		host: req.host,
 	});
 	next();
+
+	// Decrement active request gauge after 10 seconds can remove setTimeout
 	setTimeout(() => {
 		activeRequestsGauge.dec({
 			method: req.method,
